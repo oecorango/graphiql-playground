@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './global.css';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/Routes';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './apollo/client';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
 );
