@@ -1,30 +1,35 @@
-import { COUNTRIES_URL } from '../constants/api';
-
-const query = `
+const schemaMainFields = `
   query {
     __schema {
-      types {
+      queryType {
         name
-        kind
-        description
         fields {
           name
+          type {
+            name
+          }
         }
+      }
+      mutationType {
+        name
+      }
+      subscriptionType {
+        name
       }
     }
   }
 `;
 
-export const fetchSchema = async () => {
+export const fetchSchema = async (url: string) => {
   try {
-    const response = await fetch(COUNTRIES_URL, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
       body: JSON.stringify({
-        query,
+        query: schemaMainFields,
       }),
     });
     const data = await response.json();
