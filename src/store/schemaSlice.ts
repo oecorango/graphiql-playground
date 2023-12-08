@@ -24,8 +24,8 @@ const initialState: State = {
   },
 };
 
-const controlledSlice = createSlice({
-  name: 'form controlled',
+const schemaSlice = createSlice({
+  name: 'Schema GraphQl',
   initialState,
 
   reducers: {
@@ -38,6 +38,6 @@ const controlledSlice = createSlice({
   },
 });
 
-export const { setSchema } = controlledSlice.actions;
+export const { setSchema } = schemaSlice.actions;
 
-export default controlledSlice.reducer;
+export default schemaSlice.reducer;

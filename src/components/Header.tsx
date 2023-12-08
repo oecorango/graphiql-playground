@@ -5,7 +5,8 @@ export const Header = () => {
     <>
       <header>
         <NavLink to={'/'}>Logo</NavLink>
-        <NavLink to={'auth'}>LogIn</NavLink>
+        <NavLink to={'login'}>LogIn</NavLink>
+        <NavLink to={'registration'}>SignUp</NavLink>
       </header>
     </>
   );
