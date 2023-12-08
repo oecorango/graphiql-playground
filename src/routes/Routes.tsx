@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { ErrorPage } from '../pages/ErrorPage';
 import { MainPage } from '../pages/MainPage';
 import { RegistrationPage } from '../pages/RegistrationPage';
+import { WelcomePage } from '../pages/WelcomePage';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ export const router = createBrowserRouter(
         <Route index element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
       </Route>
     </Route>
   )
