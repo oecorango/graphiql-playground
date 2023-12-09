@@ -1,8 +1,4 @@
-import {
-  createRoutesFromElements,
-  createBrowserRouter,
-  Route,
-} from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { RootLayout } from '../layouts/RootLayout';
 import { LoginPage } from '../pages/LoginPage';
 import { ErrorPage } from '../pages/ErrorPage';
@@ -10,15 +6,17 @@ import { MainPage } from '../pages/MainPage';
 import { RegistrationPage } from '../pages/RegistrationPage';
 import { WelcomePage } from '../pages/WelcomePage';
 
-export const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
-      <Route errorElement={<ErrorPage />}>
-        <Route index element={<MainPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<RegistrationPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
-      </Route>
-    </Route>
-  )
-);
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <MainPage /> },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/registration', element: <RegistrationPage /> },
+      { path: '/welcome', element: <WelcomePage /> },
+      { errorElement: <ErrorPage /> },
+    ],
+  },
+]);

@@ -39,15 +39,20 @@ export const LoginForm = () => {
   return (
     <>
       <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
-        <input type="text" {...form.register('email')} />
+        <input type="text" {...form.register('email')} placeholder="Email" />
         <input
           type="password"
           autoComplete="off"
           {...form.register('password')}
+          placeholder="Password"
         />
-        <button type="submit">Sign in</button>
+        <button type="submit" className={styles.button}>
+          Sign in
+        </button>
       </form>
-      <Link to={'/registration'}>Registration</Link>
+      <Link to={'/registration'} className={styles.link}>
+        Don’t have account? Sign up
+      </Link>
     </>
   );
 };

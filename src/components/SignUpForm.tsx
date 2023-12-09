@@ -40,23 +40,29 @@ export const SignUpForm = () => {
   return (
     <>
       <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
-        <input type="text" {...form.register('email')} />
+        <input type="text" {...form.register('email')} placeholder="Email" />
 
         <input
           type="password"
           autoComplete="off"
           {...form.register('password')}
+          placeholder="Password"
         />
 
         <input
           type="password"
           autoComplete="off"
           {...form.register('confirmPassword')}
+          placeholder="Confirm Password"
         />
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" className={styles.button}>
+          Sign Up
+        </button>
       </form>
-      <Link to={'/login'}>Login</Link>
+      <Link to={'/login'} className={styles.link}>
+        Already have an account? Log in
+      </Link>
     </>
   );
 };
