@@ -1,0 +1,37 @@
+.header {
+  height: 60px;
+  background-color: #2c7973;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 20px 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  * {
+    margin: 0;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+}
+
+a {
+  color: #fff;
+  margin-left: 20px;
+  transition: 0.3s;
+  &:hover {
+    color: #7dffb1;
+  }
+}
