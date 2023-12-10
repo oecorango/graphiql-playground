@@ -37,6 +37,7 @@ export const LoginForm = () => {
             name: user.displayName,
           })
         );
+
         navigate('/');
       })
       .catch(({ message }) => {

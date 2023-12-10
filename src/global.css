@@ -33,7 +33,10 @@ body {
 }
 
 main {
-  min-height: calc(100vh - 216px);
+  min-height: calc(100vh - 130px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 header {
@@ -55,4 +58,16 @@ button:hover {
   border-radius: 3px;
   border: 3px solid #7dffb1;
   color: #7dffb1;
+}
+.active {
+  text-decoration: underline;
+}
+
+svg path {
+  transition: 0.3s ease-in-out;
+}
+
+svg:hover path {
+  transition: all 0.3s ease-in-out;
+  fill: #7dffb1;
 }
