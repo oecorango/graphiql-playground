@@ -1,30 +1,13 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Logo } from './svg/LogoSvg';
 import styles from './Header.module.scss';
-import { getAuth, signOut } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Navigation } from './Navigation';
 
 export const Header = () => {
   const navigate = useNavigate();
-  const auth = getAuth();
+  const [curLanguage, setCurLanguage] = useState(localStorage.getItem('lang'));
 
-  const [user, setUser] = useState(auth.currentUser);
-
-  useEffect(() => {
-    auth.onAuthStateChanged((currentUser) => {
-      setUser(currentUser);
-    });
-  }, [auth]);
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      navigate('/welcome');
-      // console.log(user);
-    } catch (error) {
-      console.error('Ошибка выхода из учетной записи:', error);
-    }
-  };
   return (
     <header className={styles.header}>
       <div className={styles.wrapper}>
@@ -34,22 +17,18 @@ export const Header = () => {
           <p>phQL</p>
         </div>
         <div className={styles.navigation}>
-          <select name="lang">
+          <select
+            name="lang"
+            onChange={(e) => {
+              setCurLanguage(e.target.value);
+              localStorage.setItem('lang', e.target.value);
+            }}
+            value={curLanguage ? curLanguage : 'en'}
+          >
             <option value="ru">ru</option>
             <option value="en">en</option>
           </select>
-          <NavLink to={'/'}>Main</NavLink>
-          <NavLink to={'welcome'}>Welcome</NavLink>
-          {user ? (
-            <button onClick={handleSignOut} className={styles.button}>
-              Sign Out
-            </button>
-          ) : (
-            <>
-              <NavLink to={'registration'}>SignUp</NavLink>
-              <NavLink to={'login'}>LogIn</NavLink>
-            </>
-          )}
+          <Navigation />
         </div>
       </div>
     </header>
