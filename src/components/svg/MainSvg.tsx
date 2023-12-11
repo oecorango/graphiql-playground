@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AboutSvg = () => {
+export const MainSvg = () => {
   return (
     <svg
       width="24"

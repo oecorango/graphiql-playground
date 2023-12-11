@@ -3,7 +3,7 @@ type Text = {
   [key in KeyLanguage]: string;
 };
 
-export type KeyText = 'main' | 'welcome' | 'login' | 'signup';
+export type KeyText = 'main' | 'welcome' | 'login' | 'signup' | 'signout';
 type Translate = {
   [key in KeyText]: Text;
 };
@@ -24,5 +24,9 @@ export const TRANSLATE_TEXT: Translate = {
   signup: {
     en: 'SignUp',
     ru: 'Регистрация',
+  },
+  signout: {
+    en: 'Sign Out',
+    ru: 'Выйти',
   },
 };
