@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useWidthResize } from '../hooks/useResize';
 import { translateText } from '../utils/translateText';
+import { AboutSvg } from '../components/svg/AboutSvg';
+import { LoginSvg } from '../components/svg/LoginSvg';
+import { MainSvg } from '../components/svg/MainSvg';
 import { getAuth, signOut } from 'firebase/auth';
-import { MainSvg } from './svg/MainSvg';
-import { AboutSvg } from './svg/AboutSvg';
-import { LoginSvg } from './svg/LoginSvg';
 
 export const Navigation = () => {
   const widthResize = useWidthResize();
@@ -39,7 +39,7 @@ export const Navigation = () => {
       </NavLink>
       {user ? (
         <NavLink onClick={handleSignOut} to={'/welcome'}>
-          {widthResize > 550 ? translateText('signout') : 'Not found'}
+          Sign Out
         </NavLink>
       ) : (
         <>

@@ -1,4 +1,4 @@
 export interface PrivateRouteProps {
-  path: string;
+  path?: string;
   element: JSX.Element;
 }
