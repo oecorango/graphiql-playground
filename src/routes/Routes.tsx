@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { PrivateRouteProps } from '../types/interface';
 
-function PrivateRoute({ element }: PrivateRouteProps) {
+function RedirectRoute({ element }: PrivateRouteProps) {
   const navigate = useNavigate();
   const auth = getAuth();
 
@@ -27,21 +27,42 @@ function PrivateRoute({ element }: PrivateRouteProps) {
   return user ? <MainPage /> : element;
 }
 
+function PrivateRoute({ element }: PrivateRouteProps) {
+  const navigate = useNavigate();
+  const auth = getAuth();
+
+  const [user, setUser] = useState(auth.currentUser);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+      if (!user) {
+        navigate('/welcome');
+      }
+    });
+  }, [auth, navigate, user]);
+
+  return !user ? <WelcomePage /> : element;
+}
+
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <MainPage /> },
+      {
+        index: true,
+        element: <PrivateRoute element={<MainPage />} />,
+      },
       {
         path: '/login',
-        element: <PrivateRoute path="/login" element={<LoginPage />} />,
+        element: <RedirectRoute path="/login" element={<LoginPage />} />,
       },
       {
         path: '/registration',
         element: (
-          <PrivateRoute path="/registration" element={<RegistrationPage />} />
+          <RedirectRoute path="/registration" element={<RegistrationPage />} />
         ),
       },
       { path: '/welcome', element: <WelcomePage /> },
