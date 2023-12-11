@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './LoginForm.module.scss';
 import { loginSchema } from '../schema/loginSchema';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/redux';
 import { setUser } from '../store/userSlice';
 
@@ -13,12 +13,19 @@ type UserLoginData = {
 };
 
 export const LoginForm = () => {
-  const form = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(loginSchema),
   });
   const auth = getAuth();
+
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const onSubmit = async (data: UserLoginData) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
@@ -30,6 +37,8 @@ export const LoginForm = () => {
             name: user.displayName,
           })
         );
+
+        navigate('/');
       })
       .catch(({ message }) => {
         console.log(message);
@@ -38,16 +47,31 @@ export const LoginForm = () => {
 
   return (
     <>
-      <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
-        <input type="text" {...form.register('email')} />
-        <input
-          type="password"
-          autoComplete="off"
-          {...form.register('password')}
-        />
-        <button type="submit">Sign in</button>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.inputContainer}>
+          <input type="text" {...register('email')} placeholder="Email" />
+          {errors.email && (
+            <p className={styles.error}>{errors.email.message}</p>
+          )}
+        </div>
+        <div className={styles.inputContainer}>
+          <input
+            type="password"
+            autoComplete="off"
+            {...register('password')}
+            placeholder="Password"
+          />
+          {errors.password && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <button type="submit" className={styles.button}>
+          Sign in
+        </button>
       </form>
-      <Link to={'/registration'}>Registration</Link>
+      <Link to={'/registration'} className={styles.link}>
+        Don’t have account? Sign up
+      </Link>
     </>
   );
 };

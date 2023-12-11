@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './SignUpForm.module.scss';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signUpSchema } from '../schema/signuUpSchema';
 import { useAppDispatch } from '../hooks/redux';
 import { setUser } from '../store/userSlice';
@@ -14,12 +14,18 @@ type UserSignUpData = {
 };
 
 export const SignUpForm = () => {
-  const form = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(signUpSchema),
   });
   const auth = getAuth();
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const onSubmit = async ({ email, password }: UserSignUpData) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -31,6 +37,7 @@ export const SignUpForm = () => {
             name: user.displayName,
           })
         );
+        navigate('/');
       })
       .catch((error) => {
         console.warn(error.message);
@@ -39,24 +46,43 @@ export const SignUpForm = () => {
 
   return (
     <>
-      <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
-        <input type="text" {...form.register('email')} />
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.inputContainer}>
+          <input type="text" {...register('email')} placeholder="Email" />
 
-        <input
-          type="password"
-          autoComplete="off"
-          {...form.register('password')}
-        />
-
-        <input
-          type="password"
-          autoComplete="off"
-          {...form.register('confirmPassword')}
-        />
-
-        <button type="submit">Sign Up</button>
+          {errors.email && (
+            <p className={styles.error}>{errors.email.message}</p>
+          )}
+        </div>
+        <div className={styles.inputContainer}>
+          <input
+            type="password"
+            autoComplete="off"
+            {...register('password')}
+            placeholder="Password"
+          />
+          {errors.password && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
+        </div>
+        <div className={styles.inputContainer}>
+          <input
+            type="password"
+            autoComplete="off"
+            {...register('confirmPassword')}
+            placeholder="Confirm Password"
+          />
+          {errors.confirmPassword && (
+            <p className={styles.error}>{errors.confirmPassword.message}</p>
+          )}
+        </div>
+        <button type="submit" className={styles.button}>
+          Sign Up
+        </button>
       </form>
-      <Link to={'/login'}>Login</Link>
+      <Link to={'/login'} className={styles.link}>
+        Already have an account? Log in
+      </Link>
     </>
   );
 };
