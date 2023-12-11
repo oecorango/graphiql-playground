@@ -39,7 +39,7 @@ export const Navigation = () => {
       </NavLink>
       {user ? (
         <NavLink onClick={handleSignOut} to={'/welcome'}>
-          Sign Out
+          {widthResize > 550 ? translateText('signout') : 'Not found'}
         </NavLink>
       ) : (
         <>
