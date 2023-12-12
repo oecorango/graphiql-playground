@@ -1,0 +1,17 @@
+.editor {
+  display: flex;
+  padding: 20px 0;
+  gap: 20px;
+  flex: 1;
+}
+
+.codeMirror {
+  width: 50%;
+  border: solid #000 3px;
+}
+
+.codeMirrorGreen {
+  background-color: #004445;
+  width: 50%;
+  border: solid #004445 3px;
+}

@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1300px;
+  min-height: 80vh;
+  margin: auto;
+  padding: 25px 20px;
+}
+
+.currentUrl {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: #004445;
+  transition: 0.3s;
+  * {
+    padding: 0 10px;
+  }
+}
+
+.inputUrl {
+  flex: 1;
+  background-color: #004445;
+  color: #fff;
+  border: solid 1px #2c7973;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}

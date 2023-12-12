@@ -28,12 +28,11 @@ body {
 
 #root {
   margin: 0 auto;
-  text-align: center;
 }
 
 main {
   min-height: calc(100vh - 130px);
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
@@ -66,7 +65,17 @@ svg path {
   transition: 0.3s ease-in-out;
 }
 
-svg:hover path {
+footer svg:hover path {
   transition: all 0.3s ease-in-out;
   fill: #7dffb1;
+}
+
+main svg:hover path {
+  transition: all 0.3s ease-in-out;
+  stroke: #2c7973;
+}
+
+main svg:hover:first-child path {
+  transition: all 0.3s ease-in-out;
+  fill: #2c7973;
 }
