@@ -18,7 +18,7 @@ function RedirectRoute({ element }: PrivateRouteProps) {
   useEffect(() => {
     auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
-      if (user) {
+      if (currentUser) {
         navigate('/');
       }
     });
@@ -36,7 +36,7 @@ function PrivateRoute({ element }: PrivateRouteProps) {
   useEffect(() => {
     auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
-      if (!user) {
+      if (!currentUser) {
         navigate('/welcome');
       }
     });
