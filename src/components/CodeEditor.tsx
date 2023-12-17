@@ -3,19 +3,28 @@ import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { solarizedDark } from '@uiw/codemirror-theme-solarized/dark';
 import styles from './CodeEditor.module.scss';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { setRequest } from '../store/dataSlice';
 
-export const CodeEditor = () => {
-  const [value, setValue] = useState("console.log('hello world!');");
-  const onChange = useCallback((val: string) => {
-    console.log('val:', val);
-    setValue(val);
-  }, []);
+type Props = {
+  response: string;
+};
+export const CodeEditor = ({ response }: Props) => {
+  const dispatch = useAppDispatch();
+  const { request } = useAppSelector((state) => state.data);
+
+  const onChange = useCallback(
+    (val: string) => {
+      dispatch(setRequest(val));
+    },
+    [dispatch]
+  );
 
   return (
     <div className={styles.editor}>
       <CodeMirror
         className={styles.codeMirror}
-        value={value}
+        value={request}
         theme={solarizedDark}
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}
@@ -23,7 +32,7 @@ export const CodeEditor = () => {
 
       <CodeMirror
         className={styles.codeMirrorGreen}
-        value={value}
+        value={response}
         theme={solarizedDark}
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}

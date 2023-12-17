@@ -1,8 +1,13 @@
 import React from 'react';
 
-export const GetData = () => {
+type Props = {
+  getResponse: () => void;
+};
+
+export const GetData = ({ getResponse }: Props) => {
   return (
     <svg
+      onClick={getResponse}
       width="24"
       height="26"
       viewBox="0 0 24 26"
