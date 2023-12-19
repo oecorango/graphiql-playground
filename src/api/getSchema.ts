@@ -32,8 +32,7 @@ export const fetchSchema = async (url: string) => {
         query: schemaMainFields,
       }),
     });
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (err) {
     console.warn(err);
   }

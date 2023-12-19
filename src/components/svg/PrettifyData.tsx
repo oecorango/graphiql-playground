@@ -1,8 +1,13 @@
 import React from 'react';
 
-export const PrettifyData = () => {
+type Props = {
+  prettifyCode: () => void;
+};
+
+export const PrettifyData = ({ prettifyCode }: Props) => {
   return (
     <svg
+      onClick={prettifyCode}
       width="21"
       height="27"
       viewBox="0 0 21 27"

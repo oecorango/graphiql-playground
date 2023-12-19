@@ -30,11 +30,28 @@ export const MainPage = () => {
     dispatch(setResponse(str));
   };
 
+  const prettifyCode = () => {
+    // const unCorrectedCode = request
+    //   .trim()
+    //   .replace(/\s+/gi, ' ')
+    //   .split(/(\s+|\(|\)|\{|\}|:)/gi);
+    //
+    // const spaces = 0;
+    // const correctedCode = unCorrectedCode.map((el) => {
+    //   if (el && el !== ' ') {
+    //     return el.length > 1 ? `${el} ` : el;
+    //   }
+    // });
+    //
+    // console.log(correctedCode);
+    // // dispatch(setRequest(uncorrectedCode.join('')));
+  };
+
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.currentUrl}>
-          <PrettifyData />
+          <PrettifyData prettifyCode={prettifyCode} />
           <CopyData />
           <GetData getResponse={getResponse} />
           <input className={styles.inputUrl} placeholder={RICK_URL} />
