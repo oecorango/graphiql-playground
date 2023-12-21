@@ -6,15 +6,20 @@
   flex: 1;
 }
 
-.codeMirror {
+.codeRequest {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 50%;
+}
+
+.requestMirror {
+  flex-grow: 1;
+  margin-bottom: 10px;
   border: solid #000 3px;
 }
 
-.codeMirrorGreen {
+.codeResponse {
   background-color: #004445;
   width: 50%;
   border-right: solid #2c7973 3px;
@@ -52,4 +57,8 @@
   align-items: center;
   height: 35px;
   background-color: #004445;
+}
+
+.buttonActive {
+  background-color: #006848;
 }

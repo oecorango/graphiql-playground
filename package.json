@@ -22,6 +22,7 @@
     "@apollo/client": "^3.8.8",
     "@apollo/server": "^4.9.5",
     "@codemirror/lang-javascript": "^6.2.1",
+    "@codemirror/lang-json": "^6.0.1",
     "@hookform/resolvers": "^3.3.2",
     "@reduxjs/toolkit": "^2.0.1",
     "@uiw/codemirror-theme-solarized": "^4.21.21",
