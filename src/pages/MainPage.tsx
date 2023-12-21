@@ -10,7 +10,8 @@ import { setSchema } from '../store/schemaSlice';
 import styles from './MainPage.module.scss';
 import { CodeEditor } from '../components/CodeEditor';
 import { fetchData } from '../api/fetchData';
-import { setResponse } from '../store/dataSlice';
+import { setRequest, setResponse } from '../store/dataSlice';
+import { formatGraphQLQuery } from '../utils/formatGraphQLQuery';
 
 export const MainPage = () => {
   const [visibleSchema, setVisibleSchema] = useState(false);
@@ -30,28 +31,16 @@ export const MainPage = () => {
     dispatch(setResponse(str));
   };
 
-  const prettifyCode = () => {
-    // const unCorrectedCode = request
-    //   .trim()
-    //   .replace(/\s+/gi, ' ')
-    //   .split(/(\s+|\(|\)|\{|\}|:)/gi);
-    //
-    // const spaces = 0;
-    // const correctedCode = unCorrectedCode.map((el) => {
-    //   if (el && el !== ' ') {
-    //     return el.length > 1 ? `${el} ` : el;
-    //   }
-    // });
-    //
-    // console.log(correctedCode);
-    // // dispatch(setRequest(uncorrectedCode.join('')));
-  };
+  function formattedRequest() {
+    const formattedQuery = formatGraphQLQuery(request);
+    dispatch(setRequest(formattedQuery));
+  }
 
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.currentUrl}>
-          <PrettifyData prettifyCode={prettifyCode} />
+          <PrettifyData prettifyCode={formattedRequest} />
           <CopyData />
           <GetData getResponse={getResponse} />
           <input className={styles.inputUrl} placeholder={RICK_URL} />
