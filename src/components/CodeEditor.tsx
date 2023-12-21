@@ -36,7 +36,7 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         value={response}
         theme={solarizedDark}
         extensions={[javascript({ jsx: true })]}
-        onChange={onChange}
+        readOnly={true}
       />
 
       <button className={styles.schemaButton} onClick={clickHandler}>
