@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono&family=Sen&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Mono', monospace;
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,6 +16,7 @@
 }
 
 a {
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   color: #ffffff;
   text-decoration: inherit;

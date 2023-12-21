@@ -8,8 +8,9 @@ import { setRequest } from '../store/dataSlice';
 
 type Props = {
   response: string;
+  clickHandler: () => Promise<void>;
 };
-export const CodeEditor = ({ response }: Props) => {
+export const CodeEditor = ({ response, clickHandler }: Props) => {
   const dispatch = useAppDispatch();
   const { request } = useAppSelector((state) => state.data);
 
@@ -37,6 +38,10 @@ export const CodeEditor = ({ response }: Props) => {
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}
       />
+
+      <button className={styles.schemaButton} onClick={clickHandler}>
+        SCHEMA
+      </button>
     </div>
   );
 };

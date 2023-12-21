@@ -46,8 +46,8 @@ export const MainPage = () => {
           <input className={styles.inputUrl} placeholder={RICK_URL} />
         </div>
 
-        <CodeEditor response={response} />
-        <button onClick={clickHandler}>показать схему</button>
+        <CodeEditor response={response} clickHandler={clickHandler} />
+
         <div>{visibleSchema ? <SchemaGraphQL /> : <></>}</div>
       </div>
     </>
