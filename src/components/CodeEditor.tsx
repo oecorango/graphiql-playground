@@ -23,13 +23,26 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
 
   return (
     <div className={styles.editor}>
-      <CodeMirror
-        className={styles.codeMirror}
-        value={request}
-        theme={solarizedDark}
-        extensions={[javascript({ jsx: true })]}
-        onChange={onChange}
-      />
+      <div className={styles.codeMirror}>
+        <CodeMirror
+          // className={styles.codeMirror}
+          value={request}
+          theme={solarizedDark}
+          extensions={[javascript({ jsx: true })]}
+          onChange={onChange}
+        />
+        <div className={styles.buttonGroup}>
+          <button className={`${styles.button} ${styles.buttonRequest}`}>
+            VARIABLES
+          </button>
+          <button className={`${styles.button} ${styles.buttonRequest}`}>
+            HEADERS
+          </button>
+          <button className={`${styles.button} ${styles.buttonRequest}`}>
+            END POINT
+          </button>
+        </div>
+      </div>
 
       <CodeMirror
         className={styles.codeMirrorGreen}
@@ -39,7 +52,10 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         readOnly={true}
       />
 
-      <button className={styles.schemaButton} onClick={clickHandler}>
+      <button
+        className={`${styles.button} ${styles.schemaButton}`}
+        onClick={clickHandler}
+      >
         SCHEMA
       </button>
     </div>
