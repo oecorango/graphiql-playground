@@ -1,24 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type requestState = {
-  headers: NonNullable<unknown>;
+  headers: string;
   query: string;
   url: string;
-  variable: NonNullable<unknown>;
+  variable: string;
 };
 
 const initialState: requestState = {
-  headers: {},
+  headers: '',
   query: '',
   url: '',
-  variable: {},
+  variable: '',
 };
 
 const requestSlice = createSlice({
   name: 'fetchData',
   initialState,
   reducers: {
-    setHeaders(state, action: PayloadAction<object>) {
+    setHeaders(state, action: PayloadAction<string>) {
       state.headers = action.payload;
     },
     setQuery(state, action: PayloadAction<string>) {
@@ -27,7 +27,7 @@ const requestSlice = createSlice({
     setURL(state, action: PayloadAction<string>) {
       state.url = action.payload;
     },
-    setVariable(state, action: PayloadAction<object>) {
+    setVariable(state, action: PayloadAction<string>) {
       state.variable = action.payload;
     },
   },

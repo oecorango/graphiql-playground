@@ -10,23 +10,39 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { json } from '@codemirror/lang-json';
 import { Settings } from '@uiw/codemirror-themes/src';
 import { OptionsRequest } from '../types/interface';
-import { setQuery } from '../store/requestSlice';
+import { setHeaders, setQuery, setVariable } from '../store/requestSlice';
 
 type Props = {
   response: string;
   clickHandler: () => Promise<void>;
 };
+
 export const CodeEditor = ({ response, clickHandler }: Props) => {
   const dispatch = useAppDispatch();
-  const { query, headers, variable } = useAppSelector(
+  const { query, variable, headers } = useAppSelector(
     (state) => state.requestData
   );
   const [isVisibleOptionsRequest, setVisibleOptionsRequest] =
     useState<OptionsRequest>('none');
 
-  const onChange = useCallback(
+  // TODO придумать как объединить все три нижестоящие функции в одну
+  const onChangeQuery = useCallback(
     (val: string) => {
       dispatch(setQuery(val));
+    },
+    [dispatch]
+  );
+
+  const onChangeVariable = useCallback(
+    (val: string) => {
+      dispatch(setVariable(val));
+    },
+    [dispatch]
+  );
+
+  const onChangeHeaders = useCallback(
+    (val: string) => {
+      dispatch(setHeaders(val));
     },
     [dispatch]
   );
@@ -58,22 +74,24 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
           value={query}
           theme={solarizedDark}
           extensions={[javascript({ jsx: true })]}
-          onChange={onChange}
+          onChange={onChangeQuery}
         />
 
         <div>
           <div>
             <CodeMirror
+              value={variable}
               theme={solarizedDarkInit({ settings: themeOptions })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
-              // onChange={onChange}
+              onChange={onChangeVariable}
             />
             <CodeMirror
+              value={headers}
               theme={solarizedDarkInit({ settings: themeOptions })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
-              // onChange={onChange}
+              onChange={onChangeHeaders}
             />
           </div>
           <div className={styles.buttonGroup}>
