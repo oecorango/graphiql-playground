@@ -7,9 +7,9 @@ export const SchemaGraphQL = () => {
   return (
     <>
       <p>QUERIES</p>
-      {schemaState.schema.queryType.fields.map((el, index) => (
-        <p key={index}>{`${el.name}(...): ${el.type.name}`}</p>
-      ))}
+      {/*{schemaState.schema.queryType.fields.map((el, index) => (*/}
+      {/*  <p key={index}>{`${el.name}(...): ${el.type.name}`}</p>*/}
+      {/*))}*/}
     </>
   );
 };

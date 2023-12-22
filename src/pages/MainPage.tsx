@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { fetchSchema } from '../api/getSchema';
 import { SchemaGraphQL } from '../components/SchemaGraphQL';
 import { PrettifyData } from '../components/svg/PrettifyData';
@@ -10,13 +10,15 @@ import { setSchema } from '../store/schemaSlice';
 import styles from './MainPage.module.scss';
 import { CodeEditor } from '../components/CodeEditor';
 import { fetchData } from '../api/fetchData';
-import { setRequest, setResponse } from '../store/dataSlice';
+import { setQuery, setURL } from '../store/requestSlice';
 import { formatGraphQLQuery } from '../utils/formatGraphQLQuery';
+import { setResponse } from '../store/responseSlice';
 
 export const MainPage = () => {
   const [visibleSchema, setVisibleSchema] = useState(false);
   const dispatch = useAppDispatch();
-  const { request, response } = useAppSelector((state) => state.data);
+  const { query, url } = useAppSelector((state) => state.requestData);
+  const { response } = useAppSelector((state) => state.responseData);
 
   const clickHandler = async () => {
     const schema = await fetchSchema(RICK_URL);
@@ -26,15 +28,19 @@ export const MainPage = () => {
   };
 
   const getResponse = async () => {
-    const response = await fetchData(RICK_URL, request);
+    const response = await fetchData(url ? url : RICK_URL, query);
     const str = JSON.stringify(response, null, '  ');
     dispatch(setResponse(str));
   };
 
   function formattedRequest() {
-    const formattedQuery = formatGraphQLQuery(request);
-    dispatch(setRequest(formattedQuery));
+    const formattedQuery = formatGraphQLQuery(query);
+    dispatch(setQuery(formattedQuery));
   }
+
+  const changeURL = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setURL(event.target.value));
+  };
 
   return (
     <>
@@ -43,7 +49,12 @@ export const MainPage = () => {
           <PrettifyData prettifyCode={formattedRequest} />
           <CopyData />
           <GetData getResponse={getResponse} />
-          <input className={styles.inputUrl} placeholder={RICK_URL} />
+          <input
+            value={url ? url : ''}
+            className={styles.inputUrl}
+            placeholder={RICK_URL}
+            onChange={changeURL}
+          />
         </div>
 
         <CodeEditor response={response} clickHandler={clickHandler} />
