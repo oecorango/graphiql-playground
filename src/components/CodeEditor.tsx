@@ -7,10 +7,10 @@ import {
 } from '@uiw/codemirror-theme-solarized/dark';
 import styles from './CodeEditor.module.scss';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { setRequest } from '../store/dataSlice';
 import { json } from '@codemirror/lang-json';
 import { Settings } from '@uiw/codemirror-themes/src';
 import { OptionsRequest } from '../types/interface';
+import { setQuery } from '../store/requestSlice';
 
 type Props = {
   response: string;
@@ -18,13 +18,15 @@ type Props = {
 };
 export const CodeEditor = ({ response, clickHandler }: Props) => {
   const dispatch = useAppDispatch();
-  const { request } = useAppSelector((state) => state.data);
+  const { query, headers, variable } = useAppSelector(
+    (state) => state.requestData
+  );
   const [isVisibleOptionsRequest, setVisibleOptionsRequest] =
     useState<OptionsRequest>('none');
 
   const onChange = useCallback(
     (val: string) => {
-      dispatch(setRequest(val));
+      dispatch(setQuery(val));
     },
     [dispatch]
   );
@@ -53,7 +55,7 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
       <div className={styles.codeRequest}>
         <CodeMirror
           className={styles.requestMirror}
-          value={request}
+          value={query}
           theme={solarizedDark}
           extensions={[javascript({ jsx: true })]}
           onChange={onChange}
