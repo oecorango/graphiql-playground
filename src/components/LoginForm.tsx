@@ -4,7 +4,7 @@ import styles from './LoginForm.module.scss';
 import { loginSchema } from '../schema/loginSchema';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../hooks/redux';
+import { useAppDispatch } from '../hooks/useRedux';
 import { setUser } from '../store/userSlice';
 
 type UserLoginData = {

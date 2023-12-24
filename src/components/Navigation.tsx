@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useWidthResize } from '../hooks/useResize';
 import { translateText } from '../utils/translateText';
-import { AboutSvg } from '../components/svg/AboutSvg';
-import { LoginSvg } from '../components/svg/LoginSvg';
-import { MainSvg } from '../components/svg/MainSvg';
+import { AboutSvg } from './svg/AboutSvg';
+import { LoginSvg } from './svg/LoginSvg';
+import { MainSvg } from './svg/MainSvg';
 import { getAuth, signOut } from 'firebase/auth';
 
 export const Navigation = () => {

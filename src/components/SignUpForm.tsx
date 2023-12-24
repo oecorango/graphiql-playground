@@ -4,7 +4,7 @@ import styles from './SignUpForm.module.scss';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUpSchema } from '../schema/signuUpSchema';
-import { useAppDispatch } from '../hooks/redux';
+import { useAppDispatch } from '../hooks/useRedux';
 import { setUser } from '../store/userSlice';
 
 type UserSignUpData = {
