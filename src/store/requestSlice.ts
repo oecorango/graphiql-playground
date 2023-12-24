@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type requestState = {
-  headers: string;
+  headers: HeadersInit;
   query: string;
   url: string;
-  variable: string;
+  variables: string;
 };
 
 const initialState: requestState = {
-  headers: '',
+  headers: {
+    'Content-Type': 'application/json',
+  },
   query: '',
   url: '',
-  variable: '',
+  variables: '',
 };
 
 const requestSlice = createSlice({
@@ -19,21 +21,29 @@ const requestSlice = createSlice({
   initialState,
   reducers: {
     setHeaders(state, action: PayloadAction<string>) {
-      state.headers = action.payload;
+      try {
+        const jsonString = action.payload.replace(/\n\s+/g, '');
+        state.headers = JSON.parse(jsonString);
+      } catch {
+        console.warn('Headers is not valid');
+      }
     },
+
     setQuery(state, action: PayloadAction<string>) {
       state.query = action.payload;
     },
+
     setURL(state, action: PayloadAction<string>) {
       state.url = action.payload;
     },
-    setVariable(state, action: PayloadAction<string>) {
-      state.variable = action.payload;
+
+    setVariables(state, action: PayloadAction<string>) {
+      state.variables = action.payload;
     },
   },
 });
 
-export const { setQuery, setURL, setVariable, setHeaders } =
+export const { setQuery, setURL, setVariables, setHeaders } =
   requestSlice.actions;
 
 export default requestSlice.reducer;

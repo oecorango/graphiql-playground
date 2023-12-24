@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import {
@@ -6,11 +6,12 @@ import {
   solarizedDarkInit,
 } from '@uiw/codemirror-theme-solarized/dark';
 import styles from './CodeEditor.module.scss';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { json } from '@codemirror/lang-json';
-import { Settings } from '@uiw/codemirror-themes/src';
-import { OptionsRequest } from '../types/interface';
-import { setHeaders, setQuery, setVariable } from '../store/requestSlice';
+import { setHeaders, setQuery, setVariables } from '../store/requestSlice';
+import { headersObjToString } from '../utils/headersObjToString';
+import { THEME_GREEN } from '../constants/codeMirrorTheme';
+import { useOpenCloseOptionsCodeMirror } from '../hooks/useOpenCloseOptions';
 
 type Props = {
   response: string;
@@ -19,11 +20,12 @@ type Props = {
 
 export const CodeEditor = ({ response, clickHandler }: Props) => {
   const dispatch = useAppDispatch();
-  const { query, variable, headers } = useAppSelector(
+  const { query, variables, headers } = useAppSelector(
     (state) => state.requestData
   );
-  const [isVisibleOptionsRequest, setVisibleOptionsRequest] =
-    useState<OptionsRequest>('none');
+
+  const { openCloseOptions, isVisibleOptionsRequest } =
+    useOpenCloseOptionsCodeMirror();
 
   // TODO придумать как объединить все три нижестоящие функции в одну
   const onChangeQuery = useCallback(
@@ -35,7 +37,7 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
 
   const onChangeVariable = useCallback(
     (val: string) => {
-      dispatch(setVariable(val));
+      dispatch(setVariables(val));
     },
     [dispatch]
   );
@@ -46,25 +48,6 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
     },
     [dispatch]
   );
-
-  const openCloseOptionsCodeMirror = (name: OptionsRequest) => {
-    if (
-      isVisibleOptionsRequest !== 'none' &&
-      isVisibleOptionsRequest === name
-    ) {
-      setVisibleOptionsRequest('none');
-    } else {
-      setVisibleOptionsRequest(name);
-    }
-  };
-
-  const themeOptions: Settings = {
-    background: '#004445',
-    selectionMatch: '#004445',
-    gutterBackground: '#004445',
-    caret: '#fff',
-    foreground: '#fff',
-  };
 
   return (
     <div className={styles.editor}>
@@ -80,15 +63,15 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         <div>
           <div>
             <CodeMirror
-              value={variable}
-              theme={solarizedDarkInit({ settings: themeOptions })}
+              value={variables}
+              theme={solarizedDarkInit({ settings: THEME_GREEN })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
               onChange={onChangeVariable}
             />
             <CodeMirror
-              value={headers}
-              theme={solarizedDarkInit({ settings: themeOptions })}
+              value={'{\n' + `${headersObjToString(headers)}` + '\n}'}
+              theme={solarizedDarkInit({ settings: THEME_GREEN })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
               onChange={onChangeHeaders}
@@ -101,7 +84,7 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
                   ? `${styles.button} ${styles.buttonRequest} ${styles.buttonActive}`
                   : `${styles.button} ${styles.buttonRequest}`
               }
-              onClick={() => openCloseOptionsCodeMirror('var')}
+              onClick={() => openCloseOptions('var')}
             >
               VARIABLES
             </button>
@@ -111,7 +94,7 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
                   ? `${styles.button} ${styles.buttonRequest} ${styles.buttonActive}`
                   : `${styles.button} ${styles.buttonRequest}`
               }
-              onClick={() => openCloseOptionsCodeMirror('headers')}
+              onClick={() => openCloseOptions('headers')}
             >
               HEADERS
             </button>

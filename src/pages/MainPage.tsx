@@ -5,7 +5,7 @@ import { PrettifyData } from '../components/svg/PrettifyData';
 import { CopyData } from '../components/svg/CopyData';
 import { GetData } from '../components/svg/GetData';
 import { RICK_URL } from '../constants/api';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { setSchema } from '../store/schemaSlice';
 import styles from './MainPage.module.scss';
 import { CodeEditor } from '../components/CodeEditor';
@@ -17,7 +17,9 @@ import { setResponse } from '../store/responseSlice';
 export const MainPage = () => {
   const [visibleSchema, setVisibleSchema] = useState(false);
   const dispatch = useAppDispatch();
-  const { query, url } = useAppSelector((state) => state.requestData);
+  const { query, url, headers, variables } = useAppSelector(
+    (state) => state.requestData
+  );
   const { response } = useAppSelector((state) => state.responseData);
 
   const clickHandler = async () => {
@@ -28,7 +30,7 @@ export const MainPage = () => {
   };
 
   const getResponse = async () => {
-    const response = await fetchData(url ? url : RICK_URL, query);
+    const response = await fetchData(url, headers, query, variables);
     const str = JSON.stringify(response, null, '  ');
     dispatch(setResponse(str));
   };
