@@ -63,14 +63,16 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         <div>
           <div>
             <CodeMirror
-              value={variables}
+              value={JSON.stringify(variables, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
               extensions={[json()]}
-              height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
+              height={
+                /*isVisibleOptionsRequest === 'var' ? */ '160px' /* : '0px'*/
+              }
               onChange={onChangeVariable}
             />
             <CodeMirror
-              value={'{\n' + `${headersObjToString(headers)}` + '\n}'}
+              value={JSON.stringify(headers, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}

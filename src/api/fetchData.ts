@@ -4,7 +4,7 @@ export const fetchData = async (
   url: string,
   headers: HeadersInit,
   query: string,
-  variables: string
+  variables: Record<string, string>
 ) => {
   try {
     // const variablesObj = JSON.parse(variables);
