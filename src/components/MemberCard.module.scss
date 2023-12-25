@@ -1,0 +1,56 @@
+.cardContainer{
+  background: #004445;
+  padding: 15px;
+  max-width: 364px;
+  display: flex;
+  gap: 20px;
+
+  @media screen and (max-width: 860px) {
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 690px) {
+max-width: 224px;
+  }
+}
+
+.memberPhoto{
+  width: 80px;
+height: 80px;
+}
+
+.cardLinks{
+  display: flex;
+  gap: 13px;
+}
+
+.tabletName{
+  display: none;
+  margin: 0 0 8px 0;
+
+  @media screen and (max-width: 860px) {
+    display: block;
+  }
+}
+
+.desktopName{
+  margin: 0 0 8px 0;
+
+  @media screen and (max-width: 860px) {
+    display: none;
+  }
+}
+
+.cardMemberInfoText{
+  margin: 0;
+  font-size: 14px;
+letter-spacing: -0.7px;
+}
+
+.cardMember{
+
+  @media screen and (max-width: 860px) {
+    display: flex;
+    gap: 20px;
+  }
+}
