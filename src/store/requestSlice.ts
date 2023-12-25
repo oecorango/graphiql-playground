@@ -4,7 +4,7 @@ type requestState = {
   headers: HeadersInit;
   query: string;
   url: string;
-  variables: string;
+  variables: Record<string, string>;
 };
 
 const initialState: requestState = {
@@ -13,7 +13,7 @@ const initialState: requestState = {
   },
   query: '',
   url: '',
-  variables: '',
+  variables: {},
 };
 
 const requestSlice = createSlice({
@@ -38,7 +38,12 @@ const requestSlice = createSlice({
     },
 
     setVariables(state, action: PayloadAction<string>) {
-      state.variables = action.payload;
+      try {
+        const jsonString = action.payload.replace(/\n\s+/g, '');
+        state.variables = JSON.parse(jsonString);
+      } catch {
+        console.warn('Variables is not valid');
+      }
     },
   },
 });
