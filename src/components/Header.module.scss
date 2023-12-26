@@ -52,3 +52,19 @@
     padding-bottom: 0;
   }
 }
+
+@keyframes animateHeader {
+  100% {
+    height: 30px;
+    background-color: #001c1d;
+  }
+}
+
+@keyframes animateWrapper {
+  100% {
+    padding-top: 3px;
+    padding-bottom: 0;
+  }
+}
+
+
