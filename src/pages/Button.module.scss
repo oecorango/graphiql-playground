@@ -1,0 +1,42 @@
+@mixin buttonPrimary {
+  display: flex;
+  height: 32px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: #001c1d;
+  font-family: Roboto Mono;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  border-radius: 3px;
+  color: #001c1d;
+  background: #7dffb1;
+  cursor: pointer;
+  transition: all 0.7s;
+
+  &:hover {
+    background-color: #b6ffd3;
+  }
+}
+@mixin buttonSecondary {
+  display: flex;
+  height: 32px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  color: #7dffb1;
+  border: 3px solid #7dffb1;
+  background-color: none;
+  cursor: pointer;
+  transition: all 0.7s;
+  
+  &:hover {
+    background-color: #7dffb14d;
+  }
+}

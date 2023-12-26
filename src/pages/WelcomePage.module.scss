@@ -1,0 +1,53 @@
+@import 'Button.module';
+.container {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1140px;
+}
+
+.offer {
+  padding: 20px;
+  background: #004445;
+}
+
+.welcomeTitle {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.8px;
+}
+
+.welcomeButton {
+  @include buttonPrimary;
+  width: 120px;
+}
+
+.welcomeButtonContainer {
+  display: flex;
+  gap: 30px;
+}
+
+.aboutText{
+  max-width: 749px;
+}
+
+.section{
+  margin-top: 40px;
+  padding: 0 10px;
+}
+
+.membersCards{
+  display: flex;
+  gap: 24px;
+  margin-bottom: 70px;
+
+  @media screen and (max-width: 690px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
