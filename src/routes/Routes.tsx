@@ -8,6 +8,7 @@ import { WelcomePage } from '../pages/WelcomePage';
 import { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { PrivateRouteProps } from '../types/interface';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 function RedirectRoute({ element }: PrivateRouteProps) {
   const navigate = useNavigate();
@@ -48,7 +49,11 @@ function PrivateRoute({ element }: PrivateRouteProps) {
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: (
+      <ErrorBoundary>
+        <RootLayout />
+      </ErrorBoundary>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
