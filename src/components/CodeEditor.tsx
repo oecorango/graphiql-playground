@@ -9,7 +9,6 @@ import styles from './CodeEditor.module.scss';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { json } from '@codemirror/lang-json';
 import { setHeaders, setQuery, setVariables } from '../store/requestSlice';
-import { headersObjToString } from '../utils/headersObjToString';
 import { THEME_GREEN } from '../constants/codeMirrorTheme';
 import { useOpenCloseOptionsCodeMirror } from '../hooks/useOpenCloseOptions';
 
@@ -63,14 +62,14 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         <div>
           <div>
             <CodeMirror
-              value={variables}
+              value={JSON.stringify(variables, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
               onChange={onChangeVariable}
             />
             <CodeMirror
-              value={'{\n' + `${headersObjToString(headers)}` + '\n}'}
+              value={JSON.stringify(headers, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
               extensions={[json()]}
               height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}

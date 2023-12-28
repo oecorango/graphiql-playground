@@ -2,24 +2,43 @@ import React from 'react';
 import styles from './WelcomePage.module.scss';
 import { ABOUT_MEMBERS } from '../constants/aboutMembers';
 import { MemberCard, MemberInfo } from '../components/MemberCard';
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const WelcomePage = () => {
+  const auth = getAuth().currentUser;
+  const navigate = useNavigate();
+
   return (
     <>
       <div className={styles.container}>
-        <section className={styles.section}>
-          <div className={styles.offer}>
-            <h2 className={styles.welcomeTitle}>Welcome to the RSGraphiQL</h2>
-            <p>
-              To get started with GraphQL,log in your account. If this is your
-              first time sign up with us.
-            </p>
-            <div className={styles.welcomeButtonContainer}>
-              <button className={styles.welcomeButton}>Log in</button>
-              <button className={styles.welcomeButton}>Sign up</button>
+        {auth ? (
+          <></>
+        ) : (
+          <section className={styles.section}>
+            <div className={styles.offer}>
+              <h2 className={styles.welcomeTitle}>Welcome to the RSGraphiQL</h2>
+              <p>
+                To get started with GraphQL,log in your account. If this is your
+                first time sign up with us.
+              </p>
+              <div className={styles.welcomeButtonContainer}>
+                <button
+                  className={styles.welcomeButton}
+                  onClick={() => navigate('/login')}
+                >
+                  Log in
+                </button>
+                <button
+                  className={styles.welcomeButton}
+                  onClick={() => navigate('/registration')}
+                >
+                  Sign up
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className={styles.section}>
           <h2>About</h2>
