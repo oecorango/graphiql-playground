@@ -1,6 +1,5 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
 import {
   solarizedDark,
   solarizedDarkInit,
@@ -11,6 +10,14 @@ import { json } from '@codemirror/lang-json';
 import { setHeaders, setQuery, setVariables } from '../store/requestSlice';
 import { THEME_GREEN } from '../constants/codeMirrorTheme';
 import { useOpenCloseOptionsCodeMirror } from '../hooks/useOpenCloseOptions';
+import { lineNumbers } from '@codemirror/view';
+import { history } from '@codemirror/commands';
+import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
+import { bracketMatching, syntaxHighlighting } from '@codemirror/language';
+import { oneDarkHighlightStyle } from '@codemirror/theme-one-dark';
+import { graphql } from 'cm6-graphql';
+import { GraphQLSchema } from 'graphql';
+import { fetchSchema } from '../api/getSchema';
 
 type Props = {
   response: string;
@@ -19,7 +26,7 @@ type Props = {
 
 export const CodeEditor = ({ response, clickHandler }: Props) => {
   const dispatch = useAppDispatch();
-  const { query, variables, headers } = useAppSelector(
+  const { query, variables, headers, url } = useAppSelector(
     (state) => state.requestData
   );
 
@@ -48,16 +55,34 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
     [dispatch]
   );
 
+  const [schema, setSchema] = useState<GraphQLSchema>();
+
+  useEffect(() => {
+    fetchSchema(url).then((data) => setSchema(data));
+  }, [url]);
+
   return (
     <div className={styles.editor}>
       <div className={styles.codeRequest}>
-        <CodeMirror
-          className={styles.requestMirror}
-          value={query}
-          theme={solarizedDark}
-          extensions={[javascript({ jsx: true })]}
-          onChange={onChangeQuery}
-        />
+        {schema ? (
+          <CodeMirror
+            className={styles.requestMirror}
+            value={query}
+            theme={solarizedDark}
+            extensions={[
+              bracketMatching(),
+              closeBrackets(),
+              history(),
+              autocompletion(),
+              lineNumbers(),
+              syntaxHighlighting(oneDarkHighlightStyle),
+              graphql(schema),
+            ]}
+            onChange={onChangeQuery}
+          />
+        ) : (
+          <></>
+        )}
 
         <div>
           <div>

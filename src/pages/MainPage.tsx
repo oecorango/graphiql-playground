@@ -6,13 +6,13 @@ import { CopyData } from '../components/svg/CopyData';
 import { GetData } from '../components/svg/GetData';
 import { RICK_URL } from '../constants/api';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
-import { setSchema } from '../store/schemaSlice';
 import styles from './MainPage.module.scss';
 import { CodeEditor } from '../components/CodeEditor';
 import { fetchData } from '../api/fetchData';
 import { setQuery, setURL } from '../store/requestSlice';
 import { formatGraphQLQuery } from '../utils/formatGraphQLQuery';
 import { setResponse } from '../store/responseSlice';
+import { GraphQLSchema } from 'graphql';
 
 export const MainPage = () => {
   const [visibleSchema, setVisibleSchema] = useState(false);
@@ -21,11 +21,11 @@ export const MainPage = () => {
     (state) => state.requestData
   );
   const { response } = useAppSelector((state) => state.responseData);
+  const [schema, setSchema] = useState<GraphQLSchema>();
 
   const clickHandler = async () => {
-    const schema = await fetchSchema(RICK_URL);
-    dispatch(setSchema(schema));
-
+    const schema = await fetchSchema(url);
+    setSchema(schema);
     visibleSchema ? setVisibleSchema(false) : setVisibleSchema(true);
   };
 
@@ -61,7 +61,7 @@ export const MainPage = () => {
 
         <CodeEditor response={response} clickHandler={clickHandler} />
 
-        <div>{visibleSchema ? <SchemaGraphQL /> : <></>}</div>
+        <div>{visibleSchema ? <SchemaGraphQL schema={schema} /> : <></>}</div>
       </div>
     </>
   );

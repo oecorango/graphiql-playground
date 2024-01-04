@@ -1,13 +1,16 @@
 import React from 'react';
-import { useAppSelector } from '../hooks/useRedux';
+import { GraphQLSchema } from 'graphql/type';
 
-export const SchemaGraphQL = () => {
-  const schemaState = useAppSelector((state) => state.schemaGraphQl);
+type Props = {
+  schema: GraphQLSchema | undefined;
+};
 
+export const SchemaGraphQL = ({ schema }: Props) => {
+  console.log(schema);
   return (
     <>
       <p>QUERIES</p>
-      {/*{schemaState.schema.queryType.fields.map((el, index) => (*/}
+      {/*{schema._queryType._fields((el, index) => (*/}
       {/*  <p key={index}>{`${el.name}(...): ${el.type.name}`}</p>*/}
       {/*))}*/}
     </>
