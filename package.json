@@ -28,6 +28,7 @@
     "@uiw/codemirror-theme-solarized": "^4.21.21",
     "@uiw/codemirror-theme-tokyo-night-storm": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
+    "cm6-graphql": "^0.0.12",
     "firebase": "^10.7.1",
     "graphql": "^16.8.1",
     "localforage": "^1.10.0",
