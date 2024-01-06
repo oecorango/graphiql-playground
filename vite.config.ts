@@ -9,6 +9,8 @@ export default defineConfig({
     globals: true,
     coverage: {
       provider: 'v8',
+      reporter: 'html',
+      include: ['**/src/'],
       exclude: [
         '**/src/components/svg/**',
         '**/src/types/**',
