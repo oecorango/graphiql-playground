@@ -21,10 +21,9 @@ import { fetchSchema } from '../api/getSchema';
 
 type Props = {
   response: string;
-  clickHandler: () => Promise<void>;
 };
 
-export const CodeEditor = ({ response, clickHandler }: Props) => {
+export const CodeEditor = ({ response }: Props) => {
   const dispatch = useAppDispatch();
   const { query, variables, headers, url } = useAppSelector(
     (state) => state.requestData
@@ -68,6 +67,8 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
           <CodeMirror
             className={styles.requestMirror}
             value={query}
+            minHeight={'250px'}
+            height={'calc(100vh - 494px)'}
             theme={solarizedDark}
             extensions={[
               bracketMatching(),
@@ -85,22 +86,6 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         )}
 
         <div>
-          <div>
-            <CodeMirror
-              value={JSON.stringify(variables, null, '  ')}
-              theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[json()]}
-              height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
-              onChange={onChangeVariable}
-            />
-            <CodeMirror
-              value={JSON.stringify(headers, null, '  ')}
-              theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[json()]}
-              height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
-              onChange={onChangeHeaders}
-            />
-          </div>
           <div className={styles.buttonGroup}>
             <button
               className={
@@ -123,6 +108,22 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
               HEADERS
             </button>
           </div>
+          <div>
+            <CodeMirror
+              value={JSON.stringify(variables, null, '  ')}
+              theme={solarizedDarkInit({ settings: THEME_GREEN })}
+              extensions={[json()]}
+              height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
+              onChange={onChangeVariable}
+            />
+            <CodeMirror
+              value={JSON.stringify(headers, null, '  ')}
+              theme={solarizedDarkInit({ settings: THEME_GREEN })}
+              extensions={[json()]}
+              height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
+              onChange={onChangeHeaders}
+            />
+          </div>
         </div>
       </div>
 
@@ -133,13 +134,6 @@ export const CodeEditor = ({ response, clickHandler }: Props) => {
         extensions={[json()]}
         readOnly={true}
       />
-
-      <button
-        className={`${styles.button} ${styles.schemaButton}`}
-        onClick={clickHandler}
-      >
-        SCHEMA
-      </button>
     </div>
   );
 };

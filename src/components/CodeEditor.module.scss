@@ -9,12 +9,12 @@
 .codeRequest {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 50%;
 }
 
 .requestMirror {
-  flex-grow: 1;
+  //flex-grow: 1;
   margin-bottom: 10px;
   border: solid #000 3px;
 }
@@ -39,13 +39,6 @@
     border: 0;
     color: #ff4646;
   }
-}
-
-.schemaButton {
-  position: absolute;
-  right: -36px;
-  top: 57px;
-  transform: rotate(270deg);
 }
 
 .buttonRequest {
