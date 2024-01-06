@@ -9,7 +9,7 @@ export default defineConfig({
     globals: true,
     coverage: {
       provider: 'v8',
-      reporter: 'html',
+      reporter: ['html', 'text'],
       include: ['**/src/'],
       exclude: [
         '**/src/components/svg/**',
