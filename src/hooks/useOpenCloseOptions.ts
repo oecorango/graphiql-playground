@@ -3,11 +3,14 @@ import { OptionsRequest } from '../types/interface';
 
 export const useOpenCloseOptionsCodeMirror = () => {
   const [isVisibleOptionsRequest, setVisibleOptionsRequest] =
-    useState<OptionsRequest>('var');
+    useState<OptionsRequest>('none');
 
   const openCloseOptions = (name: OptionsRequest) => {
-    if (isVisibleOptionsRequest !== 'var') {
-      setVisibleOptionsRequest('var');
+    if (
+      isVisibleOptionsRequest !== 'none' &&
+      isVisibleOptionsRequest === name
+    ) {
+      setVisibleOptionsRequest('none');
     } else {
       setVisibleOptionsRequest(name);
     }
