@@ -112,14 +112,14 @@ export const CodeEditor = ({ response }: Props) => {
             <CodeMirror
               value={JSON.stringify(variables, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[json()]}
+              // extensions={[json()]}
               height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
               onChange={onChangeVariable}
             />
             <CodeMirror
               value={JSON.stringify(headers, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[json()]}
+              // extensions={[json()]}
               height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
               onChange={onChangeHeaders}
             />
@@ -131,7 +131,7 @@ export const CodeEditor = ({ response }: Props) => {
         className={styles.codeResponse}
         value={response}
         theme={solarizedDark}
-        extensions={[json()]}
+        // extensions={[json()]}
         readOnly={true}
       />
     </div>
