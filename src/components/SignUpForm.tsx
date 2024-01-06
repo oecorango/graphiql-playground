@@ -48,7 +48,12 @@ export const SignUpForm = () => {
     <>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>
-          <input type="text" {...register('email')} placeholder="Email" />
+          <input
+            role={'emailInput'}
+            type="text"
+            {...register('email')}
+            placeholder="Email"
+          />
 
           {errors.email && (
             <p className={styles.error}>{errors.email.message}</p>
@@ -56,6 +61,7 @@ export const SignUpForm = () => {
         </div>
         <div className={styles.inputContainer}>
           <input
+            role={'passwordInput'}
             type="password"
             autoComplete="off"
             {...register('password')}
@@ -67,6 +73,7 @@ export const SignUpForm = () => {
         </div>
         <div className={styles.inputContainer}>
           <input
+            role={'confirmPasswordInput'}
             type="password"
             autoComplete="off"
             {...register('confirmPassword')}
@@ -76,7 +83,7 @@ export const SignUpForm = () => {
             <p className={styles.error}>{errors.confirmPassword.message}</p>
           )}
         </div>
-        <button type="submit" className={styles.button}>
+        <button role={'btnSubmit'} type="submit" className={styles.button}>
           Sign Up
         </button>
       </form>
