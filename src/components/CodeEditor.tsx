@@ -87,26 +87,12 @@ export const CodeEditor = ({ response }: Props) => {
             <CodeMirror
               value={JSON.stringify(variables, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[
-                bracketMatching(),
-                closeBrackets(),
-                history(),
-                autocompletion(),
-                lineNumbers(),
-              ]}
               height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
               onChange={onChangeVariable}
             />
             <CodeMirror
               value={JSON.stringify(headers, null, '  ')}
               theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[
-                bracketMatching(),
-                closeBrackets(),
-                history(),
-                autocompletion(),
-                lineNumbers(),
-              ]}
               height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
               onChange={onChangeHeaders}
             />
