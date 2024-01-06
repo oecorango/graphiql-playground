@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 20px;
+  top: 105px;
+  max-height: 65vh;
+  overflow: auto;
+  background-color: #2C7973;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  p {
+    margin: 0;
+  }
+}
+
+.header {
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: 2px solid;
+}
+
+.title {
+  color: #ff9f9f;
+}
+
+.description{
+  display: block;
+  width: 350px;
+  font-size: 12px;
+}

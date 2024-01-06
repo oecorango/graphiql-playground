@@ -59,9 +59,20 @@ export const MainPage = () => {
           />
         </div>
 
-        <CodeEditor response={response} clickHandler={clickHandler} />
+        <CodeEditor response={response} />
 
-        <div>{visibleSchema ? <SchemaGraphQL schema={schema} /> : <></>}</div>
+        <button
+          className={
+            visibleSchema
+              ? `${styles.button} ${styles.schemaButton} ${styles.schemaActive}`
+              : `${styles.button} ${styles.schemaButton}`
+          }
+          onClick={clickHandler}
+        >
+          SCHEMA
+        </button>
+
+        {visibleSchema ? <SchemaGraphQL schema={schema} /> : <></>}
       </div>
     </>
   );
