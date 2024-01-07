@@ -57,3 +57,13 @@ export const ABOUT_MEMBERS = [
     },
   },
 ];
+
+export const TRANSLATE_Welcome = {
+  en: 'Welcome to the RSGraphiQL',
+  ru: 'Добро пожаловать в RSGraphiQL',
+};
+
+export const TRANSLATE_Welcome_TEXT = {
+  en: 'To get started with GraphQL,log in your account. If this is your first time sign up with us.',
+  ru: 'Для начала работы с GraphQL войдите в свою учетную запись. Если вы впервые здесь, зарегистрируйтесь у нас.',
+};

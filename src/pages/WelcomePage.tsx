@@ -1,16 +1,32 @@
 import styles from './WelcomePage.module.scss';
-import { ABOUT_MEMBERS } from '../constants/aboutMembers';
+import {
+  ABOUT_MEMBERS,
+  TRANSLATE_Welcome,
+  TRANSLATE_Welcome_TEXT,
+} from '../constants/aboutMembers';
 import { MemberCard, MemberInfo } from '../components/MemberCard';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { TRANSLATE_ABOUT } from '../language/translationOptions';
+import {
+  TRANSLATE_ABOUT,
+  TRANSLATE_TEXT,
+} from '../language/translationOptions';
 import { useAppSelector } from '../hooks/useRedux';
 
 export const WelcomePage = () => {
   const auth = getAuth().currentUser;
   const navigate = useNavigate();
   const curLanguage = useAppSelector((state) => state.language.language);
-
+  const welcomeInfo =
+    curLanguage === 'ru' ? TRANSLATE_Welcome.ru : TRANSLATE_Welcome.en;
+  const welcomeInfoText =
+    curLanguage === 'ru'
+      ? TRANSLATE_Welcome_TEXT.ru
+      : TRANSLATE_Welcome_TEXT.en;
+  const Login =
+    curLanguage === 'ru' ? TRANSLATE_TEXT.login.ru : TRANSLATE_TEXT.login.en;
+  const SingUp =
+    curLanguage === 'ru' ? TRANSLATE_TEXT.signup.ru : TRANSLATE_TEXT.signup.en;
   return (
     <>
       <div className={styles.container}>
@@ -19,23 +35,20 @@ export const WelcomePage = () => {
         ) : (
           <section className={styles.section}>
             <div className={styles.offer}>
-              <h2 className={styles.welcomeTitle}>Welcome to the RSGraphiQL</h2>
-              <p>
-                To get started with GraphQL,log in your account. If this is your
-                first time sign up with us.
-              </p>
+              <h2 className={styles.welcomeTitle}>{welcomeInfo}</h2>
+              <p>{welcomeInfoText}</p>
               <div className={styles.welcomeButtonContainer}>
                 <button
                   className={styles.welcomeButton}
                   onClick={() => navigate('/login')}
                 >
-                  Log in
+                  {Login}
                 </button>
                 <button
                   className={styles.welcomeButton}
                   onClick={() => navigate('/registration')}
                 >
-                  Sign up
+                  {SingUp}
                 </button>
               </div>
             </div>

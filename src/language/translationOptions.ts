@@ -116,18 +116,3 @@ export const TRANSLATE_ABOUT = {
   About Course:
   We're currently enrolled in the "React 2023Q4" course offered by rolling-scopes-school. This course equips us with the latest knowledge and skills required to excel in React development.`,
 };
-
-export const TRANSLATE_EGOR = {
-  ru: `а React.`,
-  en: `t.`,
-};
-
-export const TRANSLATE_OLEG = {
-  ru: `а React.`,
-  en: `t.`,
-};
-
-export const TRANSLATE_LIZA = {
-  ru: `а React.`,
-  en: `t.`,
-};
