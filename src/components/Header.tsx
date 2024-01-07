@@ -3,10 +3,13 @@ import { Logo } from './svg/LogoSvg';
 import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import { Navigation } from './Navigation';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
+import { setLanguage } from '../store/languageSlice';
 
 export const Header = () => {
   const navigate = useNavigate();
-  const [curLanguage, setCurLanguage] = useState(localStorage.getItem('lang'));
+  const curLanguage = useAppSelector((state) => state.language.language);
+  const dispatch = useAppDispatch();
 
   const [offset, setOffset] = useState<number>(0);
 
@@ -41,10 +44,11 @@ export const Header = () => {
           <select
             name="lang"
             onChange={(e) => {
-              setCurLanguage(e.target.value);
-              localStorage.setItem('lang', e.target.value);
+              if (e.target.value === 'en' || e.target.value === 'ru') {
+                dispatch(setLanguage(e.target.value));
+              }
             }}
-            value={curLanguage ? curLanguage : 'en'}
+            value={curLanguage}
           >
             <option value="ru">ru</option>
             <option value="en">en</option>

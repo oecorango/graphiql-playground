@@ -23,7 +23,9 @@ initializeApp(firebaseConfig);
 test('renders the RootLayout for the application', () => {
   render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </React.StrictMode>
   );
 

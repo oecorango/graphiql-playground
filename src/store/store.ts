@@ -14,7 +14,7 @@ import { rootReducer } from './rootReducer';
 
 const persistConfig = {
   key: 'root',
-  version: 1,
+  version: 2,
   storage,
   blacklist: ['responseData'],
 };

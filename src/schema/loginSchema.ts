@@ -1,15 +1,19 @@
 import * as yup from 'yup';
+import { translateText } from '../utils/translateText';
 
 export const loginSchema = yup
   .object()
   .shape({
-    email: yup.string().email().required(),
+    email: yup
+      .string()
+      .email(translateText('errorEmail'))
+      .required(translateText('required')),
     password: yup
       .string()
       .matches(
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{"':;?/><,.[\]|`~\-\\]).{8,}$/,
-        'Password should contain at least 8 characters with at least one number, one uppercase letter, one lowercase letter, and one special character'
+        translateText('errorPassword')
       )
-      .required(),
+      .required(translateText('required')),
   })
-  .required();
+  .required(translateText('required'));

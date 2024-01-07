@@ -25,9 +25,9 @@ test('LoginForm submits with valid data', async () => {
     </Provider>
   );
 
-  const emailInput = screen.getByPlaceholderText('Email');
-  const passwordInput = screen.getByPlaceholderText('Password');
-  const signInButton = screen.getByText('Sign in');
+  const emailInput = screen.getByRole('emailInput');
+  const passwordInput = screen.getByRole('passwordInput');
+  const signInButton = screen.getByRole('btnSubmit');
 
   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
   fireEvent.change(passwordInput, { target: { value: 'password123' } });
@@ -44,9 +44,9 @@ test('LoginForm displays error message on submission failure', async () => {
     </Provider>
   );
 
-  const emailInput = screen.getByPlaceholderText('Email');
-  const passwordInput = screen.getByPlaceholderText('Password');
-  const signInButton = screen.getByText('Sign in');
+  const emailInput = screen.getByRole('emailInput');
+  const passwordInput = screen.getByRole('passwordInput');
+  const signInButton = screen.getByRole('btnSubmit');
 
   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
   fireEvent.change(passwordInput, { target: { value: 'password123' } });
