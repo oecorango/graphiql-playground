@@ -116,3 +116,8 @@ export const TRANSLATE_ABOUT = {
   About Course:
   We're currently enrolled in the "React 2023Q4" course offered by rolling-scopes-school. This course equips us with the latest knowledge and skills required to excel in React development.`,
 };
+
+export const TRANSLATE_ERROR = {
+  ru: 'Неверный email или пароль. Пожалуйста, попробуйте снова.',
+  en: 'Invalid email or password. Please try again.',
+};

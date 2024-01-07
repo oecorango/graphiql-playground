@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { setUser } from '../store/userSlice';
 import { translate } from '../utils/translateText';
+import { useState } from 'react';
+import { TRANSLATE_ERROR } from '../language/translationOptions';
 
 type UserLoginData = {
   email: string;
@@ -14,7 +16,10 @@ type UserLoginData = {
 };
 
 export const LoginForm = () => {
+  const [errorMessage, setErrorMessage] = useState('');
   const language = useAppSelector((state) => state.language.language);
+  const ErrorMessage =
+    language === 'ru' ? TRANSLATE_ERROR.ru : TRANSLATE_ERROR.en;
   const {
     register,
     formState: { errors },
@@ -41,6 +46,7 @@ export const LoginForm = () => {
         navigate('/');
       })
       .catch(({ message }) => {
+        setErrorMessage(ErrorMessage);
         console.log(message);
       });
   };
@@ -59,6 +65,7 @@ export const LoginForm = () => {
             <p className={styles.error}>{errors.email.message}</p>
           )}
         </div>
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         <div className={styles.inputContainer}>
           <input
             role={'passwordInput'}
