@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './WelcomePage.module.scss';
 import { ABOUT_MEMBERS } from '../constants/aboutMembers';
 import { MemberCard, MemberInfo } from '../components/MemberCard';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { TRANSLATE_ABOUT } from '../language/translationOptions';
 
 export const WelcomePage = () => {
   const auth = getAuth().currentUser;
   const navigate = useNavigate();
+  const [curLanguage, setCurLanguage] = useState(localStorage.getItem('lang'));
 
   return (
     <>
@@ -43,14 +45,7 @@ export const WelcomePage = () => {
         <section className={styles.section}>
           <h2>About</h2>
           <p className={styles.aboutText}>
-            Lorem ipsum dolor sit amet consectetur. Nisi diam elementum pulvinar
-            dictum sem nulla aliquam. Quis sit ornare curabitur nibh a. Nulla
-            senectus purus enim morbi. Sed tincidunt risus sed fringilla rutrum.
-            Venenatis augue tempor ornare placerat quam habitant sed. Est duis
-            nibh sed sed penatibus semper faucibus odio. Suscipit venenatis eros
-            ornare nisi ultrices volutpat. Pharetra ultrices nisl urna sagittis
-            eget ornare. Ornare ac suspendisse maecenas rhoncus integer amet
-            bibendum morbi.
+            {curLanguage === 'ru' ? TRANSLATE_ABOUT.ru : TRANSLATE_ABOUT.en}
           </p>
         </section>
 
