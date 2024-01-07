@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useWidthResize } from '../hooks/useResize';
-import { translateText } from '../utils/translateText';
+import { translate } from '../utils/translateText';
 import { AboutSvg } from './svg/AboutSvg';
 import { LoginSvg } from './svg/LoginSvg';
 import { MainSvg } from './svg/MainSvg';
@@ -9,12 +9,14 @@ import { getAuth, signOut } from 'firebase/auth';
 import styles from './Navigation.module.scss';
 import { ExitSvg } from './svg/ExitSvg';
 import { RegistrationSvg } from './svg/RegistrationSvg';
+import { useAppSelector } from '../hooks/useRedux';
 
 export const Navigation = () => {
   const widthResize = useWidthResize();
   const navigate = useNavigate();
   const auth = getAuth();
   const [user, setUser] = useState(auth.currentUser);
+  const language = useAppSelector((state) => state.language.language);
 
   useEffect(() => {
     auth.onAuthStateChanged((currentUser) => {
@@ -35,10 +37,10 @@ export const Navigation = () => {
   return (
     <>
       <NavLink to={'/'} className={styles.navLink}>
-        {widthResize > 550 ? translateText('main') : <MainSvg />}
+        {widthResize > 550 ? translate('main', language) : <MainSvg />}
       </NavLink>
       <NavLink to={'/welcome'} className={styles.navLink}>
-        {widthResize > 550 ? translateText('welcome') : <AboutSvg />}
+        {widthResize > 550 ? translate('welcome', language) : <AboutSvg />}
       </NavLink>
       {user ? (
         <NavLink
@@ -46,15 +48,19 @@ export const Navigation = () => {
           to={'/welcome'}
           className={styles.navLink}
         >
-          {widthResize > 550 ? translateText('signout') : <ExitSvg />}
+          {widthResize > 550 ? translate('signout', language) : <ExitSvg />}
         </NavLink>
       ) : (
         <>
           <NavLink to={'/login'} className={styles.navLink}>
-            {widthResize > 550 ? translateText('login') : <LoginSvg />}
+            {widthResize > 550 ? translate('login', language) : <LoginSvg />}
           </NavLink>
           <NavLink to={'/registration'} className={styles.navLink}>
-            {widthResize > 550 ? translateText('signup') : <RegistrationSvg />}
+            {widthResize > 550 ? (
+              translate('signup', language)
+            ) : (
+              <RegistrationSvg />
+            )}
           </NavLink>
         </>
       )}
