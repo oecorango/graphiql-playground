@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './LoginForm.module.scss';
-import { loginSchema } from '../schema/loginSchema';
+import { loginSchemaEn, loginSchemaRu } from '../schema/loginSchema';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
@@ -14,20 +14,18 @@ type UserLoginData = {
 };
 
 export const LoginForm = () => {
+  const language = useAppSelector((state) => state.language.language);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(language === 'en' ? loginSchemaEn : loginSchemaRu),
   });
   const auth = getAuth();
-
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
-  const language = useAppSelector((state) => state.language.language);
 
   const onSubmit = async (data: UserLoginData) => {
     signInWithEmailAndPassword(auth, data.email, data.password)

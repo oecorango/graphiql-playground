@@ -1,5 +1,5 @@
 import { expect, describe, it } from 'vitest';
-import { signUpSchema } from '../schema/signuUpSchema';
+import { signUpSchemaEn } from '../schema/signuUpSchema';
 describe('SignUp Validation Schema', () => {
   it('should validate with correct input', async () => {
     const validData = {
@@ -8,7 +8,7 @@ describe('SignUp Validation Schema', () => {
       confirmPassword: 'Test@123',
     };
 
-    await expect(signUpSchema.isValid(validData)).resolves.toBe(true);
+    await expect(signUpSchemaEn.isValid(validData)).resolves.toBe(true);
   });
 
   it('should not validate with incorrect email format', async () => {
@@ -18,7 +18,7 @@ describe('SignUp Validation Schema', () => {
       confirmPassword: 'Test@123',
     };
 
-    await expect(signUpSchema.isValid(invalidEmailData)).resolves.toBe(false);
+    await expect(signUpSchemaEn.isValid(invalidEmailData)).resolves.toBe(false);
   });
 
   it('should not validate with weak password', async () => {
@@ -28,7 +28,7 @@ describe('SignUp Validation Schema', () => {
       confirmPassword: 'weakpassword',
     };
 
-    await expect(signUpSchema.isValid(weakPasswordData)).resolves.toBe(false);
+    await expect(signUpSchemaEn.isValid(weakPasswordData)).resolves.toBe(false);
   });
 
   it('should not validate when password and confirm password do not match', async () => {
@@ -38,7 +38,7 @@ describe('SignUp Validation Schema', () => {
       confirmPassword: 'MismatchPassword',
     };
 
-    await expect(signUpSchema.isValid(mismatchPasswordData)).resolves.toBe(
+    await expect(signUpSchemaEn.isValid(mismatchPasswordData)).resolves.toBe(
       false
     );
   });
