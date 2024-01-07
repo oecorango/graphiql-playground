@@ -40,8 +40,13 @@ export const MainPage = () => {
     dispatch(setQuery(formattedQuery));
   }
 
-  const changeURL = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setURL(event.target.value));
+  const changeURL = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ClipboardEvent<HTMLInputElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    dispatch(setURL(target.value));
   };
 
   return (
@@ -56,17 +61,14 @@ export const MainPage = () => {
             className={styles.inputUrl}
             placeholder={RICK_URL}
             onChange={changeURL}
+            onPaste={changeURL}
           />
         </div>
 
         <CodeEditor response={response} />
 
         <button
-          className={
-            visibleSchema
-              ? `${styles.button} ${styles.schemaButton} ${styles.schemaActive}`
-              : `${styles.button} ${styles.schemaButton}`
-          }
+          className={`${styles.button} ${styles.schemaButton}`}
           onClick={clickHandler}
         >
           SCHEMA
