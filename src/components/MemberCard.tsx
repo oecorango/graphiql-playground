@@ -3,12 +3,13 @@ import { TelegramSvg } from './svg/TelegramSvg';
 import { MailSvg } from './svg/MailSvg';
 import styles from './MemberCard.module.scss';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../hooks/useRedux';
 
 export type MemberInfo = {
-  name: string;
+  name: { en: string; ru: string };
   photo: string;
   links: string[];
-  about: string;
+  about: { en: string; ru: string };
 };
 
 export type MemberCardProps = {
@@ -16,6 +17,10 @@ export type MemberCardProps = {
 };
 
 export const MemberCard = ({ memberInfo }: MemberCardProps) => {
+  const curLanguage = useAppSelector((state) => state.language.language);
+  const name = curLanguage === 'ru' ? memberInfo.name.ru : memberInfo.name.en;
+  const about =
+    curLanguage === 'ru' ? memberInfo.about.ru : memberInfo.about.en;
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardMember}>
@@ -25,7 +30,7 @@ export const MemberCard = ({ memberInfo }: MemberCardProps) => {
           className={styles.memberPhoto}
         />
         <div>
-          <h3 className={styles.tabletName}>{memberInfo.name}</h3>
+          <h3 className={styles.tabletName}></h3>
           <div className={styles.cardLinks}>
             <Link to={memberInfo.links[0]}>
               <GitHubSvg />
@@ -33,15 +38,15 @@ export const MemberCard = ({ memberInfo }: MemberCardProps) => {
             <Link to={memberInfo.links[1]}>
               <TelegramSvg />
             </Link>
-            <Link to={memberInfo.links[2]}>
+            <a href={`mailto:${memberInfo.links[2]}`}>
               <MailSvg />
-            </Link>
+            </a>
           </div>
         </div>
       </div>
       <div className={styles.cardMemberInfo}>
-        <h3 className={styles.desktopName}>{memberInfo.name}</h3>
-        <p className={styles.cardMemberInfoText}>{memberInfo.about}</p>
+        <h3 className={styles.desktopName}>{name}</h3>
+        <p className={styles.cardMemberInfoText}>{about}</p>
       </div>
     </div>
   );
