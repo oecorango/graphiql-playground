@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from '../store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { LoginForm } from '../components/LoginForm';
+import { Header } from '../components/Header';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -22,11 +23,12 @@ initializeApp(firebaseConfig);
 
 test('renders the RootLayout for the application', () => {
   render(
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <Header />
+      </Provider>
+    </BrowserRouter>
   );
-
   const logo = screen.getByRole('logo');
   expect(logo).toBeTruthy();
 });
