@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
 import styles from './WelcomePage.module.scss';
 import { ABOUT_MEMBERS } from '../constants/aboutMembers';
 import { MemberCard, MemberInfo } from '../components/MemberCard';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { TRANSLATE_ABOUT } from '../language/translationOptions';
+import { useAppSelector } from '../hooks/useRedux';
 
 export const WelcomePage = () => {
   const auth = getAuth().currentUser;
   const navigate = useNavigate();
-  const [curLanguage, setCurLanguage] = useState(localStorage.getItem('lang'));
+  const curLanguage = useAppSelector((state) => state.language.language);
 
   return (
     <>
@@ -43,7 +43,7 @@ export const WelcomePage = () => {
         )}
 
         <section className={styles.section}>
-          <h2>About</h2>
+          <h2>{curLanguage === 'ru' ? 'О Нас' : 'About'}</h2>
           <p className={styles.aboutText}>
             {curLanguage === 'ru' ? TRANSLATE_ABOUT.ru : TRANSLATE_ABOUT.en}
           </p>
