@@ -79,7 +79,12 @@ export const CodeEditor = ({ response }: Props) => {
             onChange={onChangeQuery}
           />
         ) : (
-          <></>
+          <CodeMirror
+            className={styles.requestMirror}
+            value={'## Invalid URL ##'}
+            theme={solarizedDark}
+            readOnly={true}
+          />
         )}
 
         <div>
