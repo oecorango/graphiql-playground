@@ -10,15 +10,15 @@ import { persistor, store } from '../store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { LoginForm } from '../components/LoginForm';
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGE_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
+const firebaseMock = {
+  apiKey: '1',
+  authDomain: '1',
+  projectId: '1',
+  storageBucket: '1',
+  messagingSenderId: '1',
+  appId: '1',
 };
-initializeApp(firebaseConfig);
+initializeApp(firebaseMock);
 
 test('renders the RootLayout for the application', () => {
   render(
