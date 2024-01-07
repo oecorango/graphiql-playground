@@ -10,8 +10,6 @@
     "format:fix": "prettier --write .",
     "preview": "vite preview",
     "prepare": "husky install",
-    "compile": "graphql-codegen",
-    "watch": "graphql-codegen -w",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
@@ -21,8 +19,6 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.8.8",
-    "@apollo/server": "^4.9.5",
     "@codemirror/lang-javascript": "^6.2.1",
     "@codemirror/lang-json": "^6.0.1",
     "@hookform/resolvers": "^3.3.2",
