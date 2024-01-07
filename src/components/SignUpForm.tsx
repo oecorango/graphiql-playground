@@ -4,8 +4,9 @@ import styles from './SignUpForm.module.scss';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { signUpSchema } from '../schema/signuUpSchema';
-import { useAppDispatch } from '../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { setUser } from '../store/userSlice';
+import { translate } from '../utils/translateText';
 
 type UserSignUpData = {
   email: string;
@@ -26,6 +27,7 @@ export const SignUpForm = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
+  const language = useAppSelector((state) => state.language.language);
 
   const onSubmit = async ({ email, password }: UserSignUpData) => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -52,7 +54,7 @@ export const SignUpForm = () => {
             role={'emailInput'}
             type="text"
             {...register('email')}
-            placeholder="Email"
+            placeholder={translate('emailPlaceholder', language)}
           />
 
           {errors.email && (
@@ -65,7 +67,7 @@ export const SignUpForm = () => {
             type="password"
             autoComplete="off"
             {...register('password')}
-            placeholder="Password"
+            placeholder={translate('passwordPlaceholder', language)}
           />
           {errors.password && (
             <p className={styles.error}>{errors.password.message}</p>
@@ -77,18 +79,18 @@ export const SignUpForm = () => {
             type="password"
             autoComplete="off"
             {...register('confirmPassword')}
-            placeholder="Confirm Password"
+            placeholder={translate('confirmPlaceholder', language)}
           />
           {errors.confirmPassword && (
             <p className={styles.error}>{errors.confirmPassword.message}</p>
           )}
         </div>
         <button role={'btnSubmit'} type="submit" className={styles.button}>
-          Sign Up
+          {translate('signup', language)}
         </button>
       </form>
       <Link to={'/login'} className={styles.link}>
-        Already have an account? Log in
+        {translate('toLogin', language)}
       </Link>
     </>
   );

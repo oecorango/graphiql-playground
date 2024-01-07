@@ -25,10 +25,10 @@ test('SignUpForm renders correctly', () => {
     </Provider>
   );
 
-  const emailInput = screen.getByPlaceholderText('Email');
-  const passwordInput = screen.getByPlaceholderText('Password');
-  const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  const signUpButton = screen.getByText('Sign Up');
+  const emailInput = screen.getByRole('emailInput');
+  const passwordInput = screen.getByRole('passwordInput');
+  const confirmPasswordInput = screen.getByRole('confirmPasswordInput');
+  const signUpButton = screen.getByRole('btnSubmit');
   const loginLink = screen.getByText('Already have an account? Log in');
 
   expect(emailInput).toBeTruthy();
@@ -47,10 +47,10 @@ test('SignUpForm submits with valid data', () => {
     </Provider>
   );
 
-  const emailInput = screen.getByPlaceholderText('Email');
-  const passwordInput = screen.getByPlaceholderText('Password');
-  const confirmPasswordInput = screen.getByPlaceholderText('Confirm Password');
-  const signUpButton = screen.getByText('Sign Up');
+  const emailInput = screen.getByRole('emailInput');
+  const passwordInput = screen.getByRole('passwordInput');
+  const confirmPasswordInput = screen.getByRole('confirmPasswordInput');
+  const signUpButton = screen.getByRole('btnSubmit');
 
   fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
   fireEvent.change(passwordInput, { target: { value: 'password123' } });

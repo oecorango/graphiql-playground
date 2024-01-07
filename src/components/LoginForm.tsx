@@ -4,8 +4,9 @@ import styles from './LoginForm.module.scss';
 import { loginSchema } from '../schema/loginSchema';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../hooks/useRedux';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { setUser } from '../store/userSlice';
+import { translate } from '../utils/translateText';
 
 type UserLoginData = {
   email: string;
@@ -26,6 +27,7 @@ export const LoginForm = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
+  const language = useAppSelector((state) => state.language.language);
 
   const onSubmit = async (data: UserLoginData) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
@@ -53,7 +55,7 @@ export const LoginForm = () => {
             role={'emailInput'}
             type="text"
             {...register('email')}
-            placeholder="Email"
+            placeholder={translate('emailPlaceholder', language)}
           />
           {errors.email && (
             <p className={styles.error}>{errors.email.message}</p>
@@ -65,18 +67,18 @@ export const LoginForm = () => {
             type="password"
             autoComplete="off"
             {...register('password')}
-            placeholder="Password"
+            placeholder={translate('passwordPlaceholder', language)}
           />
           {errors.password && (
             <p className={styles.error}>{errors.password.message}</p>
           )}
         </div>
         <button role={'btnSubmit'} type="submit" className={styles.button}>
-          Sign in
+          {translate('login', language)}
         </button>
       </form>
       <Link to={'/registration'} className={styles.link}>
-        Don’t have account? Sign up
+        {translate('toRegistration', language)}
       </Link>
     </>
   );
