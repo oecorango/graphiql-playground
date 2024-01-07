@@ -7,6 +7,8 @@ import { LoginSvg } from './svg/LoginSvg';
 import { MainSvg } from './svg/MainSvg';
 import { getAuth, signOut } from 'firebase/auth';
 import styles from './Navigation.module.scss';
+import { ExitSvg } from './svg/ExitSvg';
+import { RegistrationSvg } from './svg/RegistrationSvg';
 
 export const Navigation = () => {
   const widthResize = useWidthResize();
@@ -44,7 +46,7 @@ export const Navigation = () => {
           to={'/welcome'}
           className={styles.navLink}
         >
-          {widthResize > 550 ? translateText('signout') : 'Not found'}
+          {widthResize > 550 ? translateText('signout') : <ExitSvg />}
         </NavLink>
       ) : (
         <>
@@ -52,7 +54,7 @@ export const Navigation = () => {
             {widthResize > 550 ? translateText('login') : <LoginSvg />}
           </NavLink>
           <NavLink to={'/registration'} className={styles.navLink}>
-            {widthResize > 550 ? translateText('signup') : 'Not found'}
+            {widthResize > 550 ? translateText('signup') : <RegistrationSvg />}
           </NavLink>
         </>
       )}
