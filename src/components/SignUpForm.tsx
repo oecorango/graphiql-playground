@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './SignUpForm.module.scss';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUpSchema } from '../schema/signuUpSchema';
+import { signUpSchemaEn, signUpSchemaRu } from '../schema/signuUpSchema';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 import { setUser } from '../store/userSlice';
 import { translate } from '../utils/translateText';
@@ -15,19 +15,18 @@ type UserSignUpData = {
 };
 
 export const SignUpForm = () => {
+  const language = useAppSelector((state) => state.language.language);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({
     mode: 'onBlur',
-    resolver: yupResolver(signUpSchema),
+    resolver: yupResolver(language === 'en' ? signUpSchemaEn : signUpSchemaRu),
   });
   const auth = getAuth();
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
-  const language = useAppSelector((state) => state.language.language);
 
   const onSubmit = async ({ email, password }: UserSignUpData) => {
     createUserWithEmailAndPassword(auth, email, password)

@@ -1,4 +1,4 @@
-import { loginSchema } from '../schema/loginSchema';
+import { loginSchemaEn } from '../schema/loginSchema';
 import { expect, describe, it } from 'vitest';
 describe('Login Validation Schema', () => {
   it('should validate with correct input', async () => {
@@ -7,7 +7,7 @@ describe('Login Validation Schema', () => {
       password: 'Test@123',
     };
 
-    await expect(loginSchema.isValid(validData)).resolves.toBe(true);
+    await expect(loginSchemaEn.isValid(validData)).resolves.toBe(true);
   });
 
   it('should not validate with incorrect email format', async () => {
@@ -16,7 +16,7 @@ describe('Login Validation Schema', () => {
       password: 'Test@123',
     };
 
-    await expect(loginSchema.isValid(invalidEmailData)).resolves.toBe(false);
+    await expect(loginSchemaEn.isValid(invalidEmailData)).resolves.toBe(false);
   });
 
   it('should not validate with weak password', async () => {
@@ -25,6 +25,6 @@ describe('Login Validation Schema', () => {
       password: 'weakpassword',
     };
 
-    await expect(loginSchema.isValid(weakPasswordData)).resolves.toBe(false);
+    await expect(loginSchemaEn.isValid(weakPasswordData)).resolves.toBe(false);
   });
 });
