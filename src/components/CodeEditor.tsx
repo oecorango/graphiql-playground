@@ -6,7 +6,6 @@ import {
 } from '@uiw/codemirror-theme-solarized/dark';
 import styles from './CodeEditor.module.scss';
 import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
-import { json } from '@codemirror/lang-json';
 import { setHeaders, setQuery, setVariables } from '../store/requestSlice';
 import { THEME_GREEN } from '../constants/codeMirrorTheme';
 import { useOpenCloseOptionsCodeMirror } from '../hooks/useOpenCloseOptions';
@@ -67,8 +66,6 @@ export const CodeEditor = ({ response }: Props) => {
           <CodeMirror
             className={styles.requestMirror}
             value={query}
-            minHeight={'250px'}
-            height={'calc(100vh - 494px)'}
             theme={solarizedDark}
             extensions={[
               bracketMatching(),
@@ -86,6 +83,20 @@ export const CodeEditor = ({ response }: Props) => {
         )}
 
         <div>
+          <div>
+            <CodeMirror
+              value={JSON.stringify(variables, null, '  ')}
+              theme={solarizedDarkInit({ settings: THEME_GREEN })}
+              height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
+              onChange={onChangeVariable}
+            />
+            <CodeMirror
+              value={JSON.stringify(headers, null, '  ')}
+              theme={solarizedDarkInit({ settings: THEME_GREEN })}
+              height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
+              onChange={onChangeHeaders}
+            />
+          </div>
           <div className={styles.buttonGroup}>
             <button
               className={
@@ -108,22 +119,6 @@ export const CodeEditor = ({ response }: Props) => {
               HEADERS
             </button>
           </div>
-          <div>
-            <CodeMirror
-              value={JSON.stringify(variables, null, '  ')}
-              theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[json()]}
-              height={isVisibleOptionsRequest === 'var' ? '160px' : '0px'}
-              onChange={onChangeVariable}
-            />
-            <CodeMirror
-              value={JSON.stringify(headers, null, '  ')}
-              theme={solarizedDarkInit({ settings: THEME_GREEN })}
-              extensions={[json()]}
-              height={isVisibleOptionsRequest === 'headers' ? '160px' : '0px'}
-              onChange={onChangeHeaders}
-            />
-          </div>
         </div>
       </div>
 
@@ -131,7 +126,6 @@ export const CodeEditor = ({ response }: Props) => {
         className={styles.codeResponse}
         value={response}
         theme={solarizedDark}
-        extensions={[json()]}
         readOnly={true}
       />
     </div>

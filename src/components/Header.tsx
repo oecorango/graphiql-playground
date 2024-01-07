@@ -28,7 +28,11 @@ export const Header = () => {
           offset ? `${styles.wrapper} ${styles.active}` : `${styles.wrapper}`
         }
       >
-        <div className={styles.logo} onClick={() => navigate('/')}>
+        <div
+          className={styles.logo}
+          onClick={() => navigate('/')}
+          role={'logo'}
+        >
           <p>RSGr</p>
           <Logo />
           <p>phQL</p>
