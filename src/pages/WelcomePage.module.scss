@@ -10,11 +10,13 @@
 .offer {
   padding: 20px;
   background: #004445;
+  @media (max-width: 350px) {
+    padding: 20px 5px;
+  }
 }
 
 .welcomeTitle {
   color: #fff;
-  font-family: Roboto;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -25,6 +27,9 @@
 .welcomeButton {
   @include buttonPrimary;
   width: 120px;
+  @media (max-width: 380px) {
+    width: 100px;
+  }
 }
 
 .welcomeButtonContainer {
@@ -39,6 +44,9 @@
 .section{
   margin-top: 40px;
   padding: 0 10px;
+  @media (max-width: 350px) {
+    padding: 0 5px;
+  }
 }
 
 .membersCards{

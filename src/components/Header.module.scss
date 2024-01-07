@@ -18,6 +18,9 @@
   margin: auto;
   box-sizing: border-box;
   padding: 18px 20px;
+  @media (max-width: 380px) {
+    justify-content: flex-end;
+  }
 }
 
 .wrapper.active {
@@ -31,6 +34,9 @@
   * {
     font-family: 'Sen', sans-serif;
     margin: 0;
+  }
+  @media (max-width: 380px) {
+    display: none;
   }
 }
 
