@@ -1,1 +1,1 @@
-# graphiql-app
+# GraphQL Playground

@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono&family=Sen&display=swap');
+
+:root {
+  font-family: 'Roboto Mono', monospace;
+  /*line-height: 1.5;*/
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #ffffffde;
+  background-color: #001c1d;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  margin: 0 auto;
+}
+
+main {
+  min-height: calc(100vh - 130px);
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}
+
+footer {
+  height: 100px;
+}
+
+/* button {
+  background-color: #7dffb1;
+  border-radius: 3px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #004445;
+  border-radius: 3px;
+  border: 3px solid #7dffb1;
+  color: #7dffb1;
+} */
+.active {
+  text-decoration: underline;
+}
+
+svg path {
+  transition: 0.3s ease-in-out;
+}
+
+footer svg:hover path {
+  transition: all 0.3s ease-in-out;
+  fill: #7dffb1;
+}
+
+main svg:hover path {
+  transition: all 0.3s ease-in-out;
+  stroke: #2c7973;
+}
+
+main svg:hover:first-child path {
+  transition: all 0.3s ease-in-out;
+  fill: #2c7973;
+}
